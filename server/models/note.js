@@ -26,7 +26,7 @@ NoteSchema.methods.findAndReturnNoteWithTags = function(data) {
         // select : 'name'
       };
   console.log('findAndReturnNoteWithTags: ');
-  
+
   Note.findOne(data)
   .populate(options)
   .exec(function (err, note) {
@@ -50,7 +50,7 @@ NoteSchema.methods.addAndRemoveTagsFromNote = function (data) {
 // NoteSchema.methods.populateNoteWithTags = function(data) {
 //   var defer = Q.defer();
 //   var Note = mongoose.model('Note', NoteSchema);
-  
+
 //   console.log(data);
 //   data
 //   .populate(options)
@@ -60,6 +60,6 @@ NoteSchema.methods.addAndRemoveTagsFromNote = function (data) {
 //     defer.resolve(note);
 //   });
 //   return defer.promise;
-// }; 
+// };
 
 module.exports = mongoose.model('Note', NoteSchema);

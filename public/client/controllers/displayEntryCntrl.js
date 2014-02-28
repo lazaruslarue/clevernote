@@ -8,6 +8,7 @@ angular.module('CleverNote')
     $scope.noteDate = new Date($rootScope.tempObj["modifiedOn"]).toDateString() ;
     $scope.noteTitle = $rootScope.tempObj["title"];
     $scope.noteEntry = $rootScope.tempObj["body"];
+    $scope.noteId = $rootScope.tempObj["_id"];
     $rootScope.tempObj == undefined;
 
   $scope.updateEntry = function() {
@@ -15,8 +16,10 @@ angular.module('CleverNote')
     noteData["title"]= $scope.noteTitle;
     noteData["tags"] = ["temp"];
     noteData["body"] = $scope.noteEntry;
+    // noteData["_id"]  = $scope.noteId;
+    console.log(noteData)
     $http({
-      url: '/notes/',
+      url: '/notes/' + $scope.noteId,
       method: "POST",
       data: JSON.stringify(noteData)
     })

@@ -12,7 +12,7 @@ module.exports = {
       console.log('error here:', err);
     });
     res.send(204);
-  }, 
+  },
   retrieveNote: function(req, res) {
     note_id = {_id: req.params.note_id};
     // console.log(Note);
@@ -26,22 +26,20 @@ module.exports = {
       res.send('error getting note', 404);
     })
     .done();
-  }, 
+  },
   updateNote: function(req, res) {
     console.log(req.body);
-    if (req.body.note_id === undefined) {
+    if (req.params.note_id === undefined) {
       var note = new Note(req.body);
       note.save();
-      console.log(note);
-      req.params.note_id = note._id;
-
+      console.log('saving note: ',note);
     }
     note_id = {_id: req.params.note_id};
     //TODO: this only allows us to update the Content of the note.
     // Probably should be improved to allow us to update
     // the Tags & Content @ the same time.
     Note.update({_id: note_id}, req.body, function (error){
-      if (error) resolve.reject();
+      if (error) console.log("error here:", error, arguments);
       res.send(204);
     });
   },
@@ -54,6 +52,6 @@ module.exports = {
   },
   listTagsOnNote: function(req, res) {
     note_id = {_id: req.params.note_id};
-  }, 
+  },
 
 };
