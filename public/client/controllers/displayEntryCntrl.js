@@ -4,20 +4,21 @@ angular.module('CleverNote')
     if ($rootScope.tempObj === undefined) {
       $state.go('main');
     }
+    console.log("TempObj", $rootScope.tempObj);
+    $scope.noteDate   = new Date($rootScope.tempObj["modifiedOn"]).toDateString() ;
+    $scope.noteTitle  = $rootScope.tempObj["title"];
+    $scope.noteEntry  = $rootScope.tempObj["body"];
+    $scope.noteId     = $rootScope.tempObj["_id"];
 
-    $scope.noteDate = new Date($rootScope.tempObj["modifiedOn"]).toDateString() ;
-    $scope.noteTitle = $rootScope.tempObj["title"];
-    $scope.noteEntry = $rootScope.tempObj["body"];
-    $scope.noteId = $rootScope.tempObj["_id"];
     $rootScope.tempObj == undefined;
 
   $scope.updateEntry = function() {
     var noteData = {};
     noteData["title"]= $scope.noteTitle;
-    noteData["tags"] = ["temp"];
+    //noteData["Tags"] = ["temp"];
     noteData["body"] = $scope.noteEntry;
-    // noteData["_id"]  = $scope.noteId;
-    console.log(noteData)
+    noteData["_id"] = $scope.noteId;
+    console.log("NoteData", noteData);
     $http({
       url: '/notes/' + $scope.noteId,
       method: "POST",
