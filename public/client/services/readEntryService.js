@@ -7,3 +7,5 @@ angular.module('CleverNote')
 		}
 	};
 }]);
+
+
