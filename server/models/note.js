@@ -6,6 +6,8 @@ var NoteSchema  = new Schema({
   title: String,
   _owner: {type: Schema.Types.ObjectId, ref: 'User'},
   _book: {type: Schema.Types.ObjectId, ref: 'Book'},
+  words: [],
+  sigBytes: Number,
   Tags: [{
     type  : Number,
     ref   : 'Tag',

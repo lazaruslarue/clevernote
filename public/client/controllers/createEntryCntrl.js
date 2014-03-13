@@ -4,7 +4,7 @@ angular.module('CleverNote')
     $scope.noteTitle = "";
     $scope.noteEntry = "";
     $scope.tagArray = [];
-    console.log(CryptoService)
+    console.log(CryptoService);
 
   $scope.postEntry = function() {
     var noteData = {};
@@ -12,11 +12,12 @@ angular.module('CleverNote')
     noteData["title"]= $scope.noteTitle;
     //noteData["Tags"] = $scope.tagArray;
     noteData["body"] = $scope.noteEntry;
-    console.log(CryptoService.hashBlob(JSON.stringify(noteData)));
+    console.log('hashblob: ' , CryptoService.hashBlob(JSON.stringify(noteData)));
     $http({
-      url: '/notes/',
+      url: '/notes/new',
       method: "POST",
-      data: JSON.stringify(noteData)
+      // data: JSON.stringify(noteData)
+      data: CryptoService.hashBlob(JSON.stringify(noteData))
     })
     .success(function(){
       alert('Saved the entry')

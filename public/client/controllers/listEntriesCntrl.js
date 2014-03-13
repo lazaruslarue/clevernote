@@ -5,7 +5,7 @@ angular.module('CleverNote')
 		url: '/notes/list'
 	})
 	.success(function(data){
-    console.log(data)
+    console.log(data);
 		$scope.listEntries = data;
 	})
 

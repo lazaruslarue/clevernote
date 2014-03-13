@@ -1,5 +1,5 @@
 angular.module('CleverNote')
-.controller('displayEntryCntrl', ['$scope', '$http', '$rootScope', '$state', function($scope, $http, $rootScope, $state, Crypto) {
+.controller('displayEntryCntrl', ['$scope', '$http', '$rootScope', '$state', function($scope, $http, $rootScope, $state) {
 
     if ($rootScope.tempObj === undefined) {
       $state.go('main');

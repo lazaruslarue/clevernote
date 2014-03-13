@@ -1,5 +1,5 @@
-angular.module('Clevernote', [])
-.service('CryptoService', function() {
+angular.module('CleverNote')
+.factory('CryptoService',  function() {
   return {
     hashBlob: function (blob, salt) {
       var hash = CryptoJS.SHA3(blob, { outputLength: 512 });

@@ -27,19 +27,21 @@ module.exports = {
     })
     .done();
   },
+
   updateNote: function(req, res) {
-    console.log(req.body);
+    console.log('this is the updateNote body',req.body);
     if (req.params.note_id === undefined) {
       var note = new Note(req.body);
       note.save();
       console.log('saving note: ',note);
     }
     note_id = {_id: req.params.note_id};
+  
     //TODO: this only allows us to update the Content of the note.
     // Probably should be improved to allow us to update
     // the Tags & Content @ the same time.
-    Note.update(note_id, {'body': req.body.body, 'title': req.body.title}, function (error){
-      if (error) console.log("error here:", error, arguments);
+    Note.update(note_id, req.body, function (error){
+      if (error) console.log("error here in updateNote: ", error, arguments);
       res.send(204);
     });
   },
