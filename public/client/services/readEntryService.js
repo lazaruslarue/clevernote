@@ -1,4 +1,4 @@
-angular.module('CleverNote')
+clevernote
 .factory('readEntryService', ['$scope', function($scope){
 	return {
 		readEntry: function(data) {

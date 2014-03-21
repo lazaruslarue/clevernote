@@ -1,26 +1,29 @@
-angular.module('CleverNote')
+clevernote
 .controller('createEntryCntrl', ['$scope', '$http', 'CryptoService', function($scope, $http, CryptoService) {
     $scope.noteDate = null;
     $scope.noteTitle = "";
     $scope.noteEntry = "";
     $scope.tagArray = [];
-    console.log(CryptoService);
-
+    
   $scope.postEntry = function() {
     var noteData = {};
-    console.log('postEntry');
+    
     noteData["title"]= $scope.noteTitle;
     //noteData["Tags"] = $scope.tagArray;
     noteData["body"] = $scope.noteEntry;
-    console.log('hashblob: ' , CryptoService.hashBlob(JSON.stringify(noteData)));
+        
+    var data = CryptoService.hashBlob(JSON.stringify(noteData));
+    console.log(data);
+    data = CryptoService.encryptHash(data,$scope.passkey.toString());
+    console.log(data);
+    
     $http({
       url: '/notes/new',
       method: "POST",
-      // data: JSON.stringify(noteData)
-      data: CryptoService.hashBlob(JSON.stringify(noteData))
+      data: data.ciphertext
     })
     .success(function(){
-      alert('Saved the entry')
+      alert('Saved the entry');
     });
   };
 
