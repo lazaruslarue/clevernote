@@ -1,10 +1,11 @@
 clevernote
-.controller('createEntryCntrl', ['$scope', '$http', 'CryptoService', function($scope, $http, CryptoService) {
+.controller('createEntryCntrl', ['$scope', '$http', 'CryptoService', 'LoginService', function($scope, $http, CryptoService, LoginService) {
     $scope.noteDate = null;
     $scope.noteTitle = "";
     $scope.noteEntry = "";
     $scope.tagArray = [];
-    
+    var passkey = $scope.saltedPasskey;
+    console.log(passkey);    
   $scope.postEntry = function() {
     var noteData = {};
     
@@ -14,7 +15,7 @@ clevernote
         
     var data = CryptoService.hashBlob(JSON.stringify(noteData));
     console.log(data);
-    data = CryptoService.encryptHash(data,$scope.passkey.toString());
+    data = CryptoService.encryptHash(data,passkey);
     console.log(data);
     
     $http({

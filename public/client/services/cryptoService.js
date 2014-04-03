@@ -8,7 +8,7 @@ clevernote
         keySize: 512/32, 
         iterations: 10 //this could be bigger :) 
       };
-  $rootScope.passkey = CryptoJS.PBKDF2('secretPassphrase', salt, options);  
+  // $rootScope.passkey = CryptoJS.PBKDF2('secretPassphrase', salt, options);
   
   return {
     hashBlob: function (blob) {
@@ -28,11 +28,11 @@ clevernote
       return decrypted.toString(CryptoJS.enc.Latin1);
     },
     returnSaltedPasskey: function (secretPassphrase) {
-      // later, we'll use a randomized QR for the salt
+      // TODO: later, we'll use a randomized QR for the salt
       var salt = CryptoJS.enc.Latin1.parse('Hello, World!');
       var options = { 
         keySize: 512/32, 
-        iterations: 10 //this could be bigger :) 
+        iterations: 100 //this could be bigger :) 
       };
       var key512Bits1000Iterations = CryptoJS.PBKDF2(secretPassphrase, salt, options);
       return key512Bits1000Iterations;
