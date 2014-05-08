@@ -1,23 +1,24 @@
 clevernote
-.controller('createEntryCntrl', ['$scope', '$http', 'CryptoService', 'LoginService', function($scope, $http, CryptoService, LoginService) {
+.controller('createEntryCntrl', ['$scope', '$http', 'CryptoService', /*'LoginService',*/ function($scope, $http, CryptoService /*, LoginService */) {
     $scope.noteDate = null;
     $scope.noteTitle = "";
     $scope.noteEntry = "";
     $scope.tagArray = [];
-    var passkey = $scope.saltedPasskey;
-    console.log(passkey);    
+    var passkey = CryptoService.returnSaltedPasskey();
+    console.log(passkey);
   $scope.postEntry = function() {
     var noteData = {};
-    
+
     noteData["title"]= $scope.noteTitle;
     //noteData["Tags"] = $scope.tagArray;
     noteData["body"] = $scope.noteEntry;
-        
-    var data = CryptoService.hashBlob(JSON.stringify(noteData));
+
+    // var data = CryptoService.hashBlob(JSON.stringify(noteData));
+    var data = JSON.stringify(noteData)
     console.log(data);
-    data = CryptoService.encryptHash(data,passkey);
+    data = CryptoService.encryptJSON(data.toString(),passkey);
     console.log(data);
-    
+
     $http({
       url: '/notes/new',
       method: "POST",

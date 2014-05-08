@@ -1,13 +1,13 @@
 clevernote
 .controller('listEntriesCntrl', ['$scope', '$http', '$state', '$rootScope', 'CryptoService',
     function($scope, $http, $state, $rootScope, CryptoService) {
-      console.log($scope.saltedPasskey);
+      console.log(CryptoService.saltedPasskey);
     $http({
       method:'GET',
       url: '/notes/list'
     })
     .success(function(data){
-      console.log('data & saltedPasskey',data,  $scope.saltedPasskey);
+      console.log('data & saltedPasskey',data,  CryptoService.saltedPasskey);
       decrypteach(data);
       $scope.listEntries = data;
     });
@@ -20,7 +20,7 @@ clevernote
     function decrypteach (blob) {
       console.log('hi: ',blob);
       for (var i in blob) {
-        console.log(CryptoService.decryptHash(blob[i].words, $scope.saltedPasskey));
+        console.log(CryptoService.decryptHash(blob[i], CryptoService.returnSaltedPasskey()));
       }
     }
   }
