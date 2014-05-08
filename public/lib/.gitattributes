@@ -7,6 +7,6 @@
 # Declare files that will always have CRLF line endings on checkout.
 *.cs     diff=csharp
 *.sln text eol=crlf
-aes.js autocrlf=true
+*.js eol=crlf
 # Denote all files that are truly binary and should not be modified.
 *.zip binary
